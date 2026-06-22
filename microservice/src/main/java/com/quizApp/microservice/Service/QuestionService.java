@@ -38,4 +38,13 @@ public class QuestionService {
         }
         return "Question not found";
     }
+
+    public String updateQuestion(Question question) {
+        if (questionDao.existsById(question.getId())) {
+            questionDao.save(question);
+            return "Question updated successfully";
+        }
+
+        return "Question not found";
+    }
 }
