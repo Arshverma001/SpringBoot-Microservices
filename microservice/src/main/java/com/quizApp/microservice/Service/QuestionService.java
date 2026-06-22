@@ -22,4 +22,14 @@ public class QuestionService {
     public List<Question> getQuestionsByCategory(String category) {
         return questionDao.findQuestionsByCategory(category);
     }
+
+
+    public String addQuestion(Question question) {
+        Question save = questionDao.save(question);
+        if (save != null) {
+            return "Question added successfully";
+        } else {
+            return "Failed to add question";
+        }
+    }
 }
