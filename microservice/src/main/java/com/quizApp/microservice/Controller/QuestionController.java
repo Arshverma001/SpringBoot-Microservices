@@ -1,6 +1,7 @@
 package com.quizApp.microservice.Controller;
 
 
+import com.quizApp.microservice.Model.Question;
 import com.quizApp.microservice.Service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,5 +30,10 @@ public class QuestionController {
     @PostMapping("add")
     public String addQuestion(@RequestBody Question question){
         return questionService.addQuestion(question);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteQuestion(@PathVariable int id) {
+        return questionService.deleteQuestion(id);
     }
 }
