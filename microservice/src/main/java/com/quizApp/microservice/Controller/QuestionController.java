@@ -34,12 +34,12 @@ public class QuestionController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteQuestion(@PathVariable int id) {
+    public ResponseEntity<String> deleteQuestion(@PathVariable int id) {
         return questionService.deleteQuestion(id);
     }
 
     @PutMapping
-    public String updateQuestion(@RequestBody Question question){
+    public ResponseEntity<String> updateQuestion(@RequestBody Question question){
         return questionService.updateQuestion(question);
     }
 }

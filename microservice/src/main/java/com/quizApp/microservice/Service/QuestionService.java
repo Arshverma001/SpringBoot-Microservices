@@ -46,20 +46,20 @@ public class QuestionService {
         }
     }
 
-    public String deleteQuestion(int id) {
+    public ResponseEntity<String> deleteQuestion(int id) {
         if(questionDao.existsById(id)){
             questionDao.deleteById(id);
-            return "Question deleted";
+            return new ResponseEntity<>("Question deleted successfully",HttpStatus.OK);
         }
-        return "Question not found";
+        return new ResponseEntity<>("Question not found",HttpStatus.BAD_REQUEST);
     }
 
-    public String updateQuestion(Question question) {
+    public ResponseEntity<String> updateQuestion(Question question) {
         if (questionDao.existsById(question.getId())) {
             questionDao.save(question);
-            return "Question updated successfully";
+            return new ResponseEntity<>("Question updated successfully",HttpStatus.OK);
         }
 
-        return "Question not found";
+        return new ResponseEntity<>("Question not found",HttpStatus.BAD_REQUEST);
     }
 }
