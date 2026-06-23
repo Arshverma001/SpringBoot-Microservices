@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-public class Question {
-
+public class QuestionWrapper {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -21,24 +20,18 @@ public class Question {
     private String option2;
     private String option3;
     private String option4;
-    private String rightAnswer;
-    private String difficultylevel;
-    private String questionTitle;
 
-    public Question(){
+    public QuestionWrapper(){
 
     }
 
-    public Question(Integer id, String category, String option1, String option2, String option3, String option4, String rightAnswer, String difficultylevel, String questionTitle) {
+    public QuestionWrapper(Integer id, String category, String option1, String option2, String option3, String option4) {
         this.id = id;
         this.category = category;
         this.option1 = option1;
         this.option2 = option2;
         this.option3 = option3;
         this.option4 = option4;
-        this.rightAnswer = rightAnswer;
-        this.difficultylevel = difficultylevel;
-        this.questionTitle = questionTitle;
     }
 
     public Integer getId() {
@@ -87,29 +80,5 @@ public class Question {
 
     public void setOption4(String option4) {
         this.option4 = option4;
-    }
-
-    public String getRightAnswer() {
-        return rightAnswer;
-    }
-
-    public void setRightAnswer(String rightAnswer) {
-        this.rightAnswer = rightAnswer;
-    }
-
-    public String getDifficultylevel() {
-        return difficultylevel;
-    }
-
-    public void setDifficultylevel(String difficultylevel) {
-        this.difficultylevel = difficultylevel;
-    }
-
-    public String getQuestionTitle() {
-        return questionTitle;
-    }
-
-    public void setQuestionTitle(String questionTitle) {
-        this.questionTitle = questionTitle;
     }
 }
