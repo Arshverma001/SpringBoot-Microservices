@@ -3,8 +3,11 @@ package com.quizApp.microservice.Service;
 import com.quizApp.microservice.Model.Question;
 import com.quizApp.microservice.Repo.QuestionDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,21 +16,33 @@ public class QuestionService {
     @Autowired
     private QuestionDao questionDao;
 
-    public List<Question> getAllQuestions() {
-        return questionDao.findAll();
+    public ResponseEntity<List<Question>> getAllQuestions() {
+        try {
+            return new ResponseEntity<>(questionDao.findAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+
     }
 
-    public List<Question> getQuestionsByCategory(String category) {
-        return questionDao.findQuestionsByCategory(category);
+    public ResponseEntity<List<Question>> getQuestionsByCategory(String category) {
+        try {
+            return  new ResponseEntity<>(questionDao.findQuestionsByCategory(category),HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  new ResponseEntity<>(new ArrayList<>(),HttpStatus.BAD_REQUEST);
+
     }
 
 
-    public String addQuestion(Question question) {
+    public ResponseEntity<String> addQuestion(Question question) {
         Question save = questionDao.save(question);
         if (save != null) {
-            return "Question added successfully";
+            return new ResponseEntity<>("Question added successfully",HttpStatus.CREATED);
         } else {
-            return "Failed to add question";
+            return new ResponseEntity<>("Failed to add question",HttpStatus.BAD_REQUEST);
         }
     }
 
