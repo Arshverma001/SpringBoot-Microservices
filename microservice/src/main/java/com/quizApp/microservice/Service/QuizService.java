@@ -3,6 +3,7 @@ package com.quizApp.microservice.Service;
 import com.quizApp.microservice.Model.Question;
 import com.quizApp.microservice.Model.QuestionWrapper;
 import com.quizApp.microservice.Model.Quiz;
+import com.quizApp.microservice.Model.Response;
 import com.quizApp.microservice.Repo.QuestionDao;
 import com.quizApp.microservice.Repo.QuizDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,19 @@ public class QuizService {
         }
 
         return new ResponseEntity<>(questionsForUsers,HttpStatus.OK);
+    }
+
+    public ResponseEntity<Integer> getQuizResult(Integer id, List<Response> responses) {
+        Quiz quiz = quizDao.findById(id).get();
+        List<Question> questions = quiz.getQuestions();
+        int i=0;
+        int result=0;
+        for(Response response : responses){
+            if(response.getResponse().equals(questions.get(i).getRightAnswer()))
+                result++;
+
+            i++;
+        }
+        return new ResponseEntity<>(result,HttpStatus.OK);
     }
 }
